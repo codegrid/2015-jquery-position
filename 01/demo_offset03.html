@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="demo.js"></script>
+<link href="demo.css" rel="stylesheet"/>
+<style>
+.label{
+  padding: 0 8px;
+  position:absolute;
+  top: -30px;
+  left: -5px;
+  border:solid 5px #aaccff;
+  background:#aaccff;
+}
+</style>
+</head>
+<body>
+  <div class="relative3" style="position:relative;border:solid 5px #aaccff;margin:30px">
+    <div class="label">relative3</div>
+    <div class="relative2" style="position:relative;border:solid 5px #aaccff;margin:30px 10px 10px 100px">
+      <div class="label">relative2</div>
+      <div class="relative1" style="position:relative;border:solid 5px #aaccff;margin:30px 10px 10px 100px">
+        <div class="label">relative1</div>
+        <div class="el static1">.static1</div>
+      </div>
+      <div class="el static2">.static2</div>
+    </div>
+    <div class="el static3">.static3</div>
+  </div>
+  <p>
+    <button class="offsetBtn" style="padding:10px;margin:2px">offset({top:100})</button>
+    <button class="cssBtn" style="padding:10px;margin:2px">css({top:100})</button>
+    <button class="autoBtn" style="padding:10px;margin:2px">css({top:'auto'})</button>
+    <button class="staticBtn" style="padding:10px;margin:2px">css({position:'static'})</button>
+    <button class="absoluteBtn" style="padding:10px;margin:2px">css({position:'absolute'})</button>
+  </p>
+  <div class="info"></div>
+<script>
+var showInfo = function(){
+  info.clearInfo();
+  info.showCss('.static1', ['position','top'], true);
+  info.showMethod('.static1', 'offset', true);
+  info.showMethod('.static1', 'position', true);
+  info.showCss('.static2', ['position','top'], true);
+  info.showMethod('.static2', 'offset', true);
+  info.showMethod('.static2', 'position', true);
+  info.showCss('.static3', ['position','top'], true);
+  info.showMethod('.static3', 'offset', true);
+  info.showMethod('.static3', 'position', true);
+}
+showInfo();
+$('.offsetBtn').on('click', function(){
+  $('.el').offset({top:100})
+  showInfo();
+})
+$('.cssBtn').on('click', function(){
+  $('.el').css({top:100})
+  showInfo();
+})
+$('.autoBtn').on('click', function(){
+  $('.el').css({top:'auto'})
+  showInfo();
+})
+$('.staticBtn').on('click', function(){
+  $('.el').css({position:'static'})
+  showInfo();
+})
+$('.absoluteBtn').on('click', function(){
+  $('.el').css({position:'absolute'})
+  showInfo();
+})
+</script>
+</body>
+</html>

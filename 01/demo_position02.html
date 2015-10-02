@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="demo.js"></script>
+<link href="demo.css" rel="stylesheet"/>
+</head>
+<body style="min-height:550px">
+  <div class="offset-relative" style="position:relative;margin-top:30px;padding:30px;height:120px;border:solid 5px #aaccff;">
+    <div class="col">
+      <div class="el static">.static</div>
+    </div>
+    <div class="col">
+      <div class="el relative" style="position:relative;top:30px;left:10px">.relative</div>
+    </div>
+    <div class="col">
+      <div class="el absolute" style="position:absolute;top:100px;left:250px">.absolute</div>
+    </div>
+    <div class="col">
+      <div class="el fixed" style="position:fixed;top:100px;left:350px">.fixed</div>
+    </div>
+  </div>
+  <div class="info"></div>
+<script>
+var showInfo = function(){
+  info.clearInfo();
+  info.showInfo('$("window").scrollTop()',$(window).scrollTop(), true);
+  info.showCss('html', ['padding-top','padding-left']);
+  info.showCss('.offset-relative', ['margin-top','padding-top','border-top-width']);
+  info.showCss('.static', ['top', 'left', 'margin-top', 'margin-left']);
+  info.showCss('.relative', ['top', 'left', 'margin-top', 'margin-left']);
+  info.showCss('.absolute', ['top', 'left', 'margin-top', 'margin-left']);
+  info.showCss('.fixed', ['top', 'left', 'margin-top', 'margin-left']);
+  info.setHtmlToInfo('<hr/>');
+  info.showMethod('.static', 'position', true);
+  info.showMethod('.relative', 'position', true);
+  info.showMethod('.absolute', 'position', true);
+  info.showMethod('.fixed', 'position', true);
+}
+$(window).scroll(function(){
+  showInfo();
+});
+showInfo();
+</script>
+</body>
+</html>

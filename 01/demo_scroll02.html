@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="demo.js"></script>
+<link href="demo.css" rel="stylesheet"/>
+</head>
+<body style="min-height:630px">
+  <br/>
+  <br/>
+  <div class="frame" style="width:200%;overflow-y:scroll;height:120px;border:solid 5px #aaccff;">
+    <div class="other other1" style="width:200%;height:50px;margin:10px"></div>
+    <div class="other other1" style="height:50px;margin:10px"></div>
+    <div class="other other1" style="height:50px;margin:10px"></div>
+    <div class="other other1" style="height:50px;margin:10px"></div>
+    <div class="other other1" style="height:50px;margin:10px"></div>
+    <div class="other other1" style="height:50px;margin:10px"></div>
+    <div class="other other1" style="height:50px;margin:10px"></div>
+    <div class="other other1" style="height:50px;margin:10px"></div>
+  </div>
+  <div class="info"></div>
+
+  <div>
+    <button class="win30">$(window).scrollTop(30).scrollLeft(30)</button>
+    <button class="doc60">$(document).scrollTop(60).scrollLeft(60)</button>
+    <button class="html200">$('html').scrollTop(90).scrollLeft(90)</button>
+    <button class="body90">$('body').scrollTop(90).scrollLeft(90)</button>
+  </div>
+  <div>
+    <button class="frame90">$('.frame').scrollTop(90).scrollLeft(90)</button>
+  </div>
+
+<script>
+
+var showInfo = function(){
+  info.clearInfo();
+  info.showInfo('window scrollTop()',$(window).scrollTop(), true)
+  info.showInfo('window scrollLeft()',$(window).scrollLeft(), true)
+
+  info.showInfo('document scrollTop()',$(document).scrollTop(), true)
+  info.showInfo('document scrollLeft()',$(document).scrollLeft(), true)
+
+  info.showInfo('html scrollTop()',$('html').scrollTop(), true)
+  info.showInfo('html scrollLeft()',$('html').scrollLeft(), true)
+
+  info.showInfo('body scrollTop()',$('body').scrollTop(), true)
+  info.showInfo('body scrollLeft()',$('body').scrollLeft(), true)
+
+  info.setHtmlToInfo('<hr/>');
+
+  info.showMethod('.frame', 'scrollTop', true);
+  info.showMethod('.frame', 'scrollLeft', true);
+}
+$(window).scroll(function(){
+  showInfo();
+});
+$('.frame').scroll(function(){
+  showInfo();
+});
+showInfo();
+
+$('.win30').on('click', function(){
+  $(window).scrollTop(30).scrollLeft(30)
+})
+$('.doc60').on('click', function(){
+  $(document).scrollTop(60).scrollLeft(60)
+})
+$('.html90').on('click', function(){
+  $('html').scrollTop(90).scrollLeft(90)
+})
+$('.body90').on('click', function(){
+  $('body').scrollTop(90).scrollLeft(90)
+})
+$('.frame90').on('click', function(){
+  $('.frame').scrollTop(90).scrollLeft(90)
+})
+
+
+
+</script>
+</body>
+</html>

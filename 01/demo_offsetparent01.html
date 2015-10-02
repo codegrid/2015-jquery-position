@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="demo.js"></script>
+<link href="demo.css" rel="stylesheet"/>
+</head>
+<body>
+  <div class="offset-relative3" style="position:relative;border:solid 5px #aaccff;margin:10px">
+    offset-relative3
+    <div class="offset-relative2" style="position:relative;border:solid 5px #aaccff;margin:10px 10px 10px 50px">
+      offset-relative2
+      <div class="offset-relative1" style="position:relative;border:solid 5px #aaccff;margin:10px 10px 10px 50px">
+        offset-relative1
+        <div class="el fixed" style="position:fixed;left:300px">.fixed</div>
+        <div class="el static1">.static1</div>
+      </div>
+      <div class="el absolute" style="position:absolute;left:150px">.absolute</div>
+      <div class="el static2">.static2</div>
+    </div>
+    <div class="el static3">.static3</div>
+    <div class="el relative" style="position:relative">.relative</div>
+  </div>
+  <div class="info"></div>
+<script>
+var showInfo = function(){
+  info.clearInfo();
+  info.showInfo('$(".static1").offsetParent()',$('.static1').offsetParent()[0].className, true)
+  info.showInfo('$(".static2").offsetParent()',$('.static2').offsetParent()[0].className, true)
+  info.showInfo('$(".static3").offsetParent()',$('.static3').offsetParent()[0].className, true)
+  info.showInfo('$(".fixed").offsetParent()',$('.fixed').offsetParent()[0].tagName, true)
+  info.showInfo('$(".absolute").offsetParent()',$('.absolute').offsetParent()[0].className, true)
+  info.showInfo('$(".relative").offsetParent()',$('.relative').offsetParent()[0].className, true)
+}
+showInfo();
+</script>
+</body>
+</html>

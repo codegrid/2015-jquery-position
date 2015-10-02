@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="demo.js"></script>
+<link href="demo.css" rel="stylesheet"/>
+</head>
+<body>
+  <div class="block other" style="position:absolute;top:50px;left:50px;width:300px;height:200px">この上でマウスポインタを<br/>動かしてください</div>
+  <div class="info"></div>
+<script>
+var showInfo = function(event){
+  info.clearInfo();
+  info.showInfo('event.offsetX',event.offsetX, true)
+  info.showInfo('event.offsetY',event.offsetY, true)
+}
+$('.block').on('mousemove', function(event){
+  showInfo(event);
+});
+showInfo({});
+</script>
+</body>
+</html>

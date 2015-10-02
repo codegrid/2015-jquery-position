@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="demo.js"></script>
+<link href="demo.css" rel="stylesheet"/>
+</head>
+<body style="min-height:600px">
+  <div class="other other1" style="height:50px">other1</div>
+  <div class="offset-relative" style="position:relative;border:solid 5px #aaccff;">
+    <div class="frame" style="overflow-y:scroll;height:200px">
+      <div class="other other2" style="margin:10px;height:80px">other2</div>
+      <div class="col">
+        <div class="el static">.static</div>
+      </div>
+      <div class="col">
+        <div class="el relative" style="position:relative;top:30px;left:10px">.relative</div>
+      </div>
+      <div class="col">
+        <div class="el absolute" style="position:absolute;top:100px;left:250px;">.absolute</div>
+      </div>
+      <div class="col">
+        <div class="el fixed" style="position:fixed;top:100px;left:350px">.fixed</div>
+      </div>
+      <div class="other other2" style="margin:10px;height:160px">other3</div>
+    </div>
+  </div>
+  <div class="info"></div>
+<script>
+
+var showInfo = function(){
+  info.clearInfo();
+  info.showInfo('$("window").scrollTop()',$(window).scrollTop(), true);
+  info.showMethod('.frame', 'scrollTop',true);
+  info.showCss('html', ['padding-top','padding-left']);
+  info.showCss('.other1', ['height']);
+  info.showCss('.offset-relative', ['border-top-width']);
+  info.showCss('.other2', ['margin-top', 'margin-bottom', 'height']);
+  info.showCss('.static', ['top', 'left', 'margin-top', 'margin-left']);
+  info.showCss('.relative', ['top', 'left', 'margin-top', 'margin-left']);
+  info.showCss('.absolute', ['top', 'left', 'margin-top', 'margin-left']);
+  info.showCss('.fixed', ['top', 'left', 'margin-top', 'margin-left']);
+  info.setHtmlToInfo('<hr/>');
+  info.showMethod('.static', 'position', true);
+  info.showMethod('.relative', 'position', true);
+  info.showMethod('.absolute', 'position');
+  info.showMethod('.fixed', 'position');
+}
+$(window).scroll(function(){
+  showInfo();
+});
+$('.frame').scroll(function(){
+  showInfo();
+});
+showInfo();
+
+
+</script>
+</body>
+</html>
