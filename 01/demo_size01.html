@@ -55,26 +55,6 @@ var showInfo = function(){
   var style = window.getComputedStyle(box[0], null);
   info.showInfo('getComputedStyle W x H',style.width + ' x ' + style.height, true);
 
-
-
-/*
-  info.showCss('html', ['padding-top','padding-left']);
-  info.showCss('body', ['width','height']);
-  info.setHtmlToInfo('<div>$(window)</div>');
-  info.showInfo('> width x height',$(window).width() + ' x ' + $(window).height(), true);
-  info.showInfo('> innerWidth x innerHeight',$(window).innerWidth() + ' x ' + $(window).innerHeight(), true);
-  info.showInfo('> outerWidth x outerHeight',$(window).outerWidth() + ' x ' + $(window).outerHeight(), true);
-
-  info.setHtmlToInfo('<div>$(document)</div>');
-  info.showInfo('> width x height',$(document).width() + ' x ' + $(document).height(), true);
-  info.showInfo('> innerWidth x innerHeight',$(document).innerWidth() + ' x ' + $(document).innerHeight(), true);
-  info.showInfo('> outerWidth x outerHeight',$(document).outerWidth() + ' x ' + $(document).outerHeight(), true);
-
-  info.setHtmlToInfo('<div>$("html")</div>');
-  info.showInfo('> width x height',$("html").width() + ' x ' + $("html").height(), true);
-  info.showInfo('> innerWidth x innerHeight',$("html").innerWidth() + ' x ' + $("html").innerHeight(), true);
-  info.showInfo('> outerWidth x outerHeight',$("html").outerWidth() + ' x ' + $("html").outerHeight(), true);
-*/
 }
 $(window).resize(function(){
   showInfo();
@@ -97,20 +77,15 @@ var resize = function(){
   showInfo();
 }
 $('select[name=boxSizing]').val(box.css('box-sizing'))
-$('input[name=padding]').val(parseInt(box.css('padding')))
-$('input[name=margin]').val(parseInt(box.css('margin')));
+$('input[name=padding]').val(parseInt(box.css('padding-top')))
+$('input[name=margin]').val(parseInt(box.css('margin-top')));
 $('input[name=width]').val(box.width())
 $('input[name=height]').val(box.height());
-$('input[name=borderWidth]').val(parseInt(box.css('border-width')));
-
-
+$('input[name=borderWidth]').val(parseInt(box.css('border-top-width')));
 
 $('.apply').click(function(){
   resize();
 })
-
-//box.innerHeight(500)
-
 
 </script>
 
