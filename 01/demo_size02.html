@@ -26,7 +26,7 @@
   <div class="box">
     <dl>
       <dt>window</dt>
-      <dd>browserWidth: <input name="winWidth" value="800" type="text"/> x browserHeight: <input name="winHeight" value="500" type="text"/></dd>
+      <dd>browserWidth: <input name="winWidth" value="800" type="text"/> x browserHeight: <input name="winHeight" value="600" type="text"/></dd>
       <dt>body</dt>
       <dd>width: <input name="htmlWidth" value="1000" type="text"/> x height: <input name="htmlHeight" value="700" type="text"/></dd>
     </dl>
@@ -63,13 +63,18 @@ var resize = function(){
   var winHeight = $('input[name=winHeight]').val();
   var htmlWidth = $('input[name=htmlWidth]').val();
   var htmlHeight = $('input[name=htmlHeight]').val();
-  window.resizeTo(winWidth, winHeight)
 
-  $('html').css({
-    width: htmlWidth,
-    height: htmlHeight
-  });
-  showInfo();
+  setTimeout(function(){
+    window.resizeTo(winWidth, winHeight);
+    setTimeout(function(){
+      $('html').css({
+        width: htmlWidth,
+        height: htmlHeight
+      });
+      showInfo();
+    },500);
+  },500);
+
 }
 
 var query = $.parseURL().query;
