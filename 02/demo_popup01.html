@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>offset()メソッドで要素の位置を取得する</title>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<link href="demo.css" rel="stylesheet"/>
+</head>
+<body height="1000px">
+
+
+
+
+
+
+
+<!-- <span>
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the <a class="popupLink" href="#">1500s</a>, when an unknown printer took a galley of type and scrambled it to make a type <span style="
+  display: inline-block;
+  padding:10px;
+  xborder:solid 1px red;
+  position:relative;
+  xborder-bottom:solid 1px #fff;
+  z-index:999;
+  background:#ffffa0;
+">hogehoge
+
+<div style="
+  position:absolute;
+  width:200px;
+  height:100px;
+  xborder:solid 1px red;
+  top:44px;
+  top:-100px;
+  left:-1px;
+  background:#ffffa0;
+">
+
+</div>
+</span>
+ -->
+
+<div class="frame">
+specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+<span>
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the <span class="popupWrapper"><a class="popupLink" href="#">1500s</a></span>, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+<span>
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the <span class="popupWrapper"><a class="popupLink" href="#">1500s</a></span>, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+<span>
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the <span class="popupWrapper"><a class="popupLink" href="#">1500s</a></span>, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+<span>
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the <span class="popupWrapper"><a class="popupLink" href="#">1500s</a></span>, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+</div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<style>
+
+.frameX{
+  width:600px;
+  height:400px;
+  overflow:scroll;
+  position: relative;
+  border:solid 10px #aaccff;
+}
+
+.popupLink{
+  padding: 0 10px;
+  display: inline-block;
+  xwidth: 100px;
+  text-decoration: none;
+  text-align: center;
+  border: solid 1px #aaa;
+  background: #fffff0;
+border-radius: 4px;
+}
+
+
+
+.popupWrapper{
+  position: relative;
+  display: inline-block;
+}
+
+.popupLink--bottomPop{
+  z-index:2;
+  position:relative;
+  border-bottom: solid 1px #fffff0;
+  border-radius: 4px 4px 0 0;
+}
+
+
+.popupLink--topPop{
+  z-index:2;
+  position:relative;
+  border-top: solid 1px #fffff0;
+  border-radius: 0 0 4px 4px;
+
+}
+.popup{
+  border: solid 1px #aaa;
+  background: #fffff0;
+  width: 300px;
+  height: 200px;
+  position: absolute;
+z-index:1;
+}
+</style>
+
+<script>
+
+
+$('.popupLink').on('click', function(){
+  $.popup(this);
+  return false;
+});
+
+
+
+
+$.popup = function(elLink){
+
+  showPopup();
+
+  function showPopup(){
+    var $link = $(elLink);
+    if($.popup.currentLink && $.popup.currentLink[0] != $link[0]){
+      hidePopup($.popup.currentLink);
+    }
+    var $popup = $link.data('popup') || $('<div class="popup"></div>').insertAfter($link).hide();
+    $popup.toggle();
+    $.popup.currentLink = $link;
+    $link.data('popup', $popup);
+
+    if($popup.css('display') === 'none'){
+      hidePopup($link);
+      return;
+    }
+    adjustPosition($link);
+  };
+
+  function hidePopup($link){
+    $link.data('popup').hide();
+// $link.
+//   removeClass('popupLink--topPop').
+//   removeClass('popupLink--bottomPop');
+
+  }
+
+  function adjustPosition($link){
+    var $popup = $link.data('popup');
+
+    var $win = $(window)
+
+
+    $popup.css({
+      top:'auto',
+      left:'auto'
+    });
+
+
+
+    var offset = $popup.offset();
+    if(offset.left + $popup.outerWidth() >= $win.width()){
+      var overWidth = $popup.outerWidth() - $link.outerWidth();
+      $popup.css('left', -overWidth)
+    }
+
+
+    if(offset.top - $win.scrollTop() + $popup.outerHeight() >= $win.height()){
+      var top = -$popup.outerHeight();
+      $popup.css('top', top)
+    }
+
+
+  }
+}
+
+
+
+/*
+$.popup = function(elLink){
+
+  showPopup();
+
+  function showPopup(){
+    var $link = $(elLink);
+    if($.popup.currentLink && $.popup.currentLink[0] != $link[0]){
+      hidePopup($.popup.currentLink);
+    }
+    var $popup = $link.data('popup') || $('<div class="popup"></div>').insertAfter($link).hide();
+    $popup.toggle();
+    $.popup.currentLink = $link;
+    $link.data('popup', $popup);
+
+    if($popup.css('display') === 'none'){
+      hidePopup($link);
+      return;
+    }
+    adjustPosition($link);
+  };
+
+  function hidePopup($link){
+    $link.data('popup').hide();
+// $link.
+//   removeClass('popupLink--topPop').
+//   removeClass('popupLink--bottomPop');
+
+  }
+
+  function adjustPosition($link){
+    var $popup = $link.data('popup');
+
+    var $win = $(window)
+
+
+    $popup.css({
+      top:'auto',
+      left:'auto'
+    });
+
+    var offset = $popup.offset();
+    if(offset.left + $popup.outerWidth() >= $win.width()){
+      var overWidth = $popup.outerWidth() - $link.outerWidth();
+      $popup.css('left', -overWidth)
+    }
+
+
+    if(offset.top - $win.scrollTop() + $popup.outerHeight() >= $win.height()){
+      var top = -$popup.outerHeight();
+      $popup.css('top', top)
+    }
+  }
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+$.popup = function(elLink){
+
+  showPopup();
+
+  function showPopup(){
+    var $link = $(elLink);
+    if($.popup.currentLink && $.popup.currentLink[0] != $link[0]){
+      hidePopup($.popup.currentLink);
+    }
+    var $popup = $link.data('popup') || $('<div class="popup"></div>').insertAfter($link).hide();
+    $popup.toggle();
+    $.popup.currentLink = $link;
+    $link.data('popup', $popup);
+
+    if($popup.css('display') === 'none'){
+      hidePopup($link);
+    }
+    // else{
+    //   $popup.css('top', -$popup.outerHeight()+1)
+    //   $link.addClass('popupLink--topPop');
+    // }
+  };
+
+  function hidePopup($link){
+    $link.data('popup').hide();
+    $link.
+      removeClass('popupLink--topPop').
+      removeClass('popupLink--bottomPop');
+  }
+}
+*/
+
+
+
+
+
+
+// var $currentPopupLink;
+
+// bindPopupEvent($('.popupLink'));
+
+
+// function bindPopupEvent($popupLink){
+//   $popupLink.one('click', function(){
+//     var self = $(this);
+//     showPopup(self);
+//     self.one('click', function(){
+//       hidePopup(self);
+//       bindPopupEvent(self);
+//     });
+//     return false;
+//   });
+// }
+
+
+
+// function hidePopup($popupLink){
+//   var $popup = $popupLink.data('popup');
+//   if($popup){
+//     $popup.remove();
+//   }
+//   $popupLink.
+//     removeClass('popupLink--topPop').
+//     removeClass('popupLink--bottomPop');
+// }
+
+// function showPopup($popupLink){
+
+//   var $win = $(window)
+
+//   if($currentPopupLink){
+//     hidePopup($currentPopupLink);
+//   }
+//   $currentPopupLink = $popupLink;
+
+//   var $popup = $('<div class="popup"></div>');
+
+//   $popup.insertAfter($popupLink)
+
+
+
+//   // $popup.css('top', -$popup.outerHeight()+1)
+//   // $popupLink.addClass('popupLink--topPop');
+
+//   // var overWidth = $popup.outerWidth() - $popupLink.outerWidth();
+//   // $popup.css('left', -overWidth-1)
+
+
+//   var popupBottom = $popup.offset().top + $popup.outerHeight() - $(window).scrollTop();
+//   if($win.height() >= popupBottom){
+//     $popup.css('top', $popup.position().top -1);
+//     $popupLink.addClass('popupLink--bottomPop');
+//   }
+//   else{
+//     $popup.css('top', -$popup.outerHeight()+1)
+//     $popupLink.addClass('popupLink--topPop');
+//   }
+
+
+//   $popupLink.data('popup', $popup);
+
+
+
+// }
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

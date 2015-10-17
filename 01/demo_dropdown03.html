@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>ドロップダウンメニューの配置処理（３）</title>
+<link href="info.css" rel="stylesheet"/>
+<link href="demo_dropdown.css" rel="stylesheet"/>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="demo.js"></script>
+</head>
+<body style="min-height:400px;">
+
+<a class="menuBtn"></a>
+<a class="menuBtn"></a>
+<a class="menuBtn"></a>
+
+<div class="popup">
+  <p>クリックしてください</p>
+  <a class="menuBtn"></a>
+  <a class="menuBtn"></a>
+  <a class="menuBtn"></a>
+</div>
+
+<p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+<div class="menu">
+  <ul>
+    <li>&nbsp;</li>
+    <li>&nbsp;</li>
+    <li>&nbsp;</li>
+  </ul>
+</div>
+
+<div class="info"></div>
+
+<script>
+var showInfo = function(){
+  info.clearInfo();
+  info.showInfo('$(".menu").parent()',$('.menu').parent().prop('tagName'), true);
+}
+
+// メニュー表示処理
+$.fn.showMenu = function(){
+
+    // メニューのjQueryオブジェクトを取得
+    var $menu = $('.menu');
+
+    // ボタンのjQueryオブジェクトを取得
+    var $button = $(this);
+
+    // ボタンの配置位置を取得
+    var buttonPos = $button.position();
+
+    // メニューの配置位置を算出
+    var menuPos = {
+
+        // ボタンのY座標（top） + ボタンの高さ（height）
+        top: buttonPos.top + $button.height(),
+
+        // ボタンのY座標（left）
+        left: buttonPos.left
+    };
+
+    // オフセット要素の取得
+    var $offset = $button.offsetParent();
+
+    // メニューをオフセット要素内に移動
+    $menu.appendTo($offset);
+
+    // メニューの配置位置を設定し表示
+    $menu.css(menuPos).show();
+
+    $('.menuBtn--active').removeClass('menuBtn--active');
+    $button.addClass('menuBtn--active');
+
+};
+
+// ボタンクリック時処理
+$('.menuBtn').on('click', function(){
+
+    // メニュー表示処理
+    $(this).showMenu();
+
+    showInfo();
+
+});
+
+</script>
+</body>
+</html>

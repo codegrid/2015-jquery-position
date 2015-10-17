@@ -1,0 +1,24 @@
+.focus{
+  color: #ffffaa;
+}
+
+.info{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  overflow-x:scroll;
+  background: #000;
+  color: #ccc;
+  padding:4px;
+  font-size:12px;
+}
+.infoContents{
+  min-width:1000px;
+}
+.info .name{
+  display: inline-block;
+  width:170px;
+}
+.info .value{
+  display: inline-block;
+}

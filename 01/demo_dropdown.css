@@ -1,0 +1,38 @@
+.popup{
+  padding: 20px;
+  position: absolute;
+  top: 130px;
+  left: 70px;
+  border: solid 1px #000;
+  border-top-width: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  max-height: 200px;
+  text-align: center;
+}
+.menuBtn{
+  display: inline-block;
+  width: 60px;
+  height: 20px;
+  text-align: center;
+  background: #ddd;
+}
+.menuBtn--active{
+  background: #000;
+}
+.menu{
+  position: absolute;
+  display: none;
+  width:200px;
+  background: #000;
+}
+.menu ul{
+  margin: 8px 4px;
+  padding: 0;
+}
+.menu li{
+  margin: 0 0 1px;
+  padding: 0;
+  list-style: none;
+  background: #333;
+}
