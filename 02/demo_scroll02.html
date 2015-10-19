@@ -36,17 +36,17 @@
 
 var showInfo = function(){
   info.clearInfo();
-  info.showInfo('window scrollTop()',$(window).scrollTop(), true)
-  info.showInfo('window scrollLeft()',$(window).scrollLeft(), true)
+  info.showInfo('$("window").scrollTop()',$(window).scrollTop(), true)
+  info.showInfo('$("window").scrollLeft()',$(window).scrollLeft(), true)
 
-  info.showInfo('document scrollTop()',$(document).scrollTop(), true)
-  info.showInfo('document scrollLeft()',$(document).scrollLeft(), true)
+  info.showInfo('$("document").scrollTop()',$(document).scrollTop(), true)
+  info.showInfo('$("document").scrollLeft()',$(document).scrollLeft(), true)
 
-  info.showInfo('html scrollTop()',$('html').scrollTop(), true)
-  info.showInfo('html scrollLeft()',$('html').scrollLeft(), true)
+  info.showInfo('$("html").scrollTop()',$('html').scrollTop(), true)
+  info.showInfo('$("html").scrollLeft()',$('html').scrollLeft(), true)
 
-  info.showInfo('body scrollTop()',$('body').scrollTop(), true)
-  info.showInfo('body scrollLeft()',$('body').scrollLeft(), true)
+  info.showInfo('$("body").scrollTop()',$('body').scrollTop(), true)
+  info.showInfo('$("body").scrollLeft()',$('body').scrollLeft(), true)
 
   info.setHtmlToInfo('<hr/>');
 

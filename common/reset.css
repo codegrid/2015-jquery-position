@@ -1,0 +1,15 @@
+html,
+body{
+  margin: 0;
+}
+html{
+  background:#eee;
+  padding: 20px;
+}
+body{
+  background: #fff;
+  font-size:12px;
+}
+button{
+  padding: 10px;
+}

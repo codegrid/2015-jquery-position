@@ -1,18 +1,3 @@
-html,
-body{
-  margin: 0;
-}
-html{
-  background:#eee;
-  padding: 20px;
-}
-body{
-  background: #fff;
-  font-size:12px;
-}
-button{
-  padding: 10px;
-}
 .el{
   margin: 10px;
   width: 70px;
@@ -20,9 +5,6 @@ button{
   text-align: center;
   background: #ff5577;
   color:#fff;
-}
-.focus{
-  color: #ffffaa;
 }
 .info{
   position:fixed;
@@ -36,8 +18,9 @@ button{
 .infoContents{
   min-width:1000px;
 }
-
-
+.info .focus{
+  color: #ffffaa;
+}
 .info .name{
   display: inline-block;
   width:170px;
