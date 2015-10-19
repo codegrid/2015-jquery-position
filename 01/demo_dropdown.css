@@ -1,7 +1,10 @@
+html{
+  font-size: 13px;
+}
 .popup{
   padding: 20px;
   position: absolute;
-  top: 130px;
+  top: 150px;
   left: 70px;
   border: solid 1px #000;
   border-top-width: 8px;
@@ -12,19 +15,27 @@
 }
 .menuBtn{
   display: inline-block;
-  width: 60px;
-  height: 20px;
+  width: 80px;
+  height: 24px;
+  color: #555;
   text-align: center;
   background: #ddd;
+  border-radius: 8px;
+  border-right: solid 2px #aaa;
+  cursor: pointer;
 }
 .menuBtn--active{
   background: #000;
+  border-radius: 8px 8px 0 0;
+  color: #aaa;
 }
 .menu{
   position: absolute;
   display: none;
   width:200px;
   background: #000;
+  border-right: solid 2px #aaa;
+  border-radius: 0 8px 8px 8px ;
 }
 .menu ul{
   margin: 8px 4px;
@@ -32,7 +43,8 @@
 }
 .menu li{
   margin: 0 0 1px;
-  padding: 0;
+  padding: 4px;
   list-style: none;
-  background: #333;
+  background: #444;
+  color: #aaa;
 }
