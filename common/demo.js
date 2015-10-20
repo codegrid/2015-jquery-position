@@ -94,13 +94,10 @@ var info = {
     $('<span class="name"/>').text(title).appendTo($p)
     $('<span class="value"/>').text(typeof json === 'object' ? JSON.stringify(json) : json).appendTo($p)
     if(isFocus) $p.addClass('focus');
-//    $p.appendTo('.info')
-info.set($p);
+    info.set($p);
   },
   setHtmlToInfo: function(html){
-//    $(html).appendTo('.info');
-info.set($(html));
-
+    info.set($(html));
   },
   showMethod: function(selector, method, isFocus){
     info.showInfo('$("'+selector + '").' + method + '()', $(selector)[method](), isFocus);
@@ -114,7 +111,7 @@ info.set($(html));
   }
 };
 $(function(){
-  if(!$('.disabledAutoHeight').size() && $('html').width() > 500){
+  if(!$('.disabledAutoHeight').size() && $('html').width() > 800){
     $('body').css('min-height', 3000)
   }
 });
