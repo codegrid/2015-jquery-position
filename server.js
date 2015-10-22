@@ -8,6 +8,14 @@ app.use(serveStatic(__dirname));
 app.listen(8080);
 console.log('Server running on 8080');
 
+/*
+app.use(function(req, res, next){
+  res.writeHead(200, {'Content-Type':'text/html'});
+  res.write('<h1>Hello Connect Server</h1>');
+  next();
+  res.end('<hr/>footer');
+});
+
 app.use(function(req, res, next){
   res.writeHead(200, {'Content-Type':'text/html'});
   res.write('<h1>Hello Connect Server</h1>');
@@ -22,3 +30,4 @@ app.use('/bar', function (req, res, next) {
   res.write('bar');
   next();
 });
+*/
