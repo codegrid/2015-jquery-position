@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>要素のサイズを取得する</title>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="demo.js"></script>
+<link href="demo.css" rel="stylesheet"/>
+<style>
+.box{
+  margin: 10px;
+  padding: 10px;
+  border:solid 1px #eee;
+  display:inline-block;
+  width: 300px;
+  height: 200px;
+  border:solid 5px #aaa;
+  overflow:scroll;
+}
+.box dl{
+  margin:0 0 10px;
+}
+.box input[type=text]{
+  width:50px;
+}
+</style>
+</head>
+<body class="disabledAutoHeight">
+  <div class="box">
+    <ul>
+      <li>box-sizing: <select name="boxSizing"><option>content-box</option><option>border-box</option></select>
+      <li>margin: <input name="margin" type="text"/>px
+      <li>padding: <input name="padding" type="text"/>px
+      <li>width: <input name="width" value="1000" type="text"/>px x height: <input name="height" value="700" type="text"/>px</li>
+      <li>border-width: <input name="borderWidth" type="text"/>px
+    </ul>
+    <button class="apply">apply</button>
+    <div style="height:100px;background:#eee"></div>
+  </div>
+  <div class="info"></div>
+<script>
+var box = $('.box');
+
+var showInfo = function(){
+  info.clearInfo();
+
+  info.showCss('.box', ['box-sizing','border-top-width','width','height','padding-top','margin-top'], true);
+
+
+  info.showInfo('width x height',box.width() + ' x ' + box.height(), true);
+  info.showInfo('innerWidth x innerHeight',box.innerWidth() + ' x ' + box.innerHeight(), true);
+  info.showInfo('outerWidth x outerHeight',box.outerWidth() + ' x ' + box.outerHeight(), true);
+
+  var style = window.getComputedStyle(box[0], null);
+  info.showInfo('getComputedStyle W x H',style.width + ' x ' + style.height, true);
+
+}
+$(window).resize(function(){
+  showInfo();
+});
+showInfo();
+
+var resize = function(){
+  var boxSizing = $('select[name=boxSizing]').val();
+  var padding = $('input[name=padding]').val();
+  var margin = $('input[name=margin]').val();
+  var width = $('input[name=width]').val();
+  var height = $('input[name=height]').val();
+  var borderWidth = $('input[name=borderWidth]').val();
+  box.css({
+    'box-sizing': boxSizing,
+    'border-width': borderWidth + 'px',
+    'padding': padding + 'px',
+    'margin': margin + 'px',
+  }).width(width).height(height);
+  showInfo();
+}
+$('select[name=boxSizing]').val(box.css('box-sizing'))
+$('input[name=padding]').val(parseInt(box.css('padding-top')))
+$('input[name=margin]').val(parseInt(box.css('margin-top')));
+$('input[name=width]').val(box.width())
+$('input[name=height]').val(box.height());
+$('input[name=borderWidth]').val(parseInt(box.css('border-top-width')));
+
+$('.apply').click(function(){
+  resize();
+})
+
+</script>
+
+</body>
+</html>

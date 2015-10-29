@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>animate({scrollTop:position})メソッドでスクロール位置を設定する（１）</title>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="demo.js"></script>
+<link href="demo.css" rel="stylesheet"/>
+<style>
+.frame{
+  border: solid 5px #aaccff;
+  width: 300px;
+  height: 200px;
+  overflow: scroll;
+}
+.frame__contents{
+  padding-top: 100px;
+  height:250px;
+}
+</style>
+
+</head>
+<body>
+  <div class="frame">
+    <div class="frame__contents">
+      <button class="scrollBtn">スクロール</button>
+      <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    </div>
+  </div>
+  <div class="info"></div>
+<script>
+var showInfo = function(){
+  info.clearInfo();
+  info.showInfo('$(".frame").scrollTop()',$('.frame').scrollTop(), true)
+}
+$('.scrollBtn').on('click', function(){
+  $('.frame').animate({scrollTop:100})
+});
+$('.frame').scroll(function(){
+  showInfo();
+});
+showInfo();
+</script>
+</body>
+</html>
