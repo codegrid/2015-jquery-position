@@ -1,0 +1,51 @@
+html{
+  font-size: 13px;
+  font-family: Meiryo;
+}
+.popup{
+  padding: 20px;
+  position: absolute;
+  top: 150px;
+  left: 70px;
+  border: solid 1px #000;
+  border-top-width: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  max-height: 200px;
+  text-align: center;
+}
+.menuBtn{
+  display: inline-block;
+  width: 80px;
+  height: 24px;
+  color: #555;
+  text-align: center;
+  background: #ddd;
+  border-radius: 8px;
+  border-right: solid 2px #aaa;
+  cursor: pointer;
+}
+.menuBtn--active{
+  background: #000;
+  border-radius: 8px 8px 0 0;
+  color: #aaa;
+}
+.menu{
+  position: absolute;
+  display: none;
+  width:200px;
+  background: #000;
+  border-right: solid 2px #aaa;
+  border-radius: 0 8px 8px 8px ;
+}
+.menu ul{
+  margin: 8px 4px;
+  padding: 0;
+}
+.menu li{
+  margin: 0 0 1px;
+  padding: 4px;
+  list-style: none;
+  background: #444;
+  color: #aaa;
+}

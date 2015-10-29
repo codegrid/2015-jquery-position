@@ -3,9 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>offset()メソッドで要素の位置を設定する</title>
+<link href="../common/reset.css" rel="stylesheet"/>
+<link href="../common/demo.css" rel="stylesheet"/>
 <script src="../node_modules/jquery/dist/jquery.js"></script>
-<script src="demo.js"></script>
-<link href="demo.css" rel="stylesheet"/>
+<script src="../common/demo.js"></script>
 <style>
 .label{
   padding: 0 8px;
@@ -36,6 +37,8 @@
     <button class="autoBtn" style="padding:10px;margin:2px">css({top:'auto'})</button>
     <button class="absoluteBtn" style="padding:10px;margin:2px">css({position:'absolute'})</button>
     <button class="staticBtn" style="padding:10px;margin:2px">css({position:'static'})</button>
+    <button class="relativeBtn" style="padding:10px;margin:2px">css({position:'relative'})</button>
+    <button class="fixedBtn" style="padding:10px;margin:2px">css({position:'fixed'})</button>
   </p>
   <div class="info"></div>
 <script>
@@ -70,6 +73,14 @@ $('.staticBtn').on('click', function(){
 })
 $('.absoluteBtn').on('click', function(){
   $('.el').css({position:'absolute'})
+  showInfo();
+})
+$('.relativeBtn').on('click', function(){
+  $('.el').css({position:'relative'})
+  showInfo();
+})
+$('.fixedBtn').on('click', function(){
+  $('.el').css({position:'fixed'})
   showInfo();
 })
 </script>

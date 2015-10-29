@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>非表示要素にoffset(position)すると位置がずれる</title>
+<style>
+body{
+  font-size: 13px;
+}
+.block{
+  position: absolute;
+  background: red;
+  width: 50px;
+  height: 50px;
+  display: none;
+  opacity: .7;
+}
+</style>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body>
+<h2>offset()してからshow()する</h2>
+<pre>
+$('.run01').on('click', function(){
+  $('.block').hide();
+  setTimeout(function(){
+    $('.block').offset({top:100,left:100}).show();
+  },100);
+});
+</pre>
+<p style="color:red">クリックの都度、位置がずれていく</p>
+<button class="run01">RUN</button>
+
+<h2>show()してからoffset()する</h2>
+<pre>
+$('.btn02').on('click', function(){
+  $('.block').hide();
+  setTimeout(function(){
+    $('.block').show().offset({top:100,left:100});
+  },100);
+});
+</pre>
+<button class="btn02">RUN</button>
+
+<div class="block"></div>
+<script>
+$('.run01').on('click', function(){
+  $('.block').hide();
+  setTimeout(function(){
+    $('.block').offset({top:100,left:100}).show();
+  },100);
+});
+$('.btn02').on('click', function(){
+  $('.block').hide();
+  setTimeout(function(){
+    $('.block').show().offset({top:100,left:100});
+  },100);
+});
+</script>
+</body>
+</html>
