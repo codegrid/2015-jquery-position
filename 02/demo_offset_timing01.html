@@ -28,19 +28,19 @@ $('.run01').on('click', function(){
   },100);
 });
 </pre>
-<p style="color:red">クリックの都度、位置がずれていく</p>
+<p style="color:red">クリックのつど、位置がずれていく</p>
 <button class="run01">RUN</button>
 
 <h2>show()してからoffset()する</h2>
 <pre>
-$('.btn02').on('click', function(){
+$('.run02').on('click', function(){
   $('.block').hide();
   setTimeout(function(){
     $('.block').show().offset({top:100,left:100});
   },100);
 });
 </pre>
-<button class="btn02">RUN</button>
+<button class="run02">RUN</button>
 
 <div class="block"></div>
 <script>
@@ -50,7 +50,7 @@ $('.run01').on('click', function(){
     $('.block').offset({top:100,left:100}).show();
   },100);
 });
-$('.btn02').on('click', function(){
+$('.run02').on('click', function(){
   $('.block').hide();
   setTimeout(function(){
     $('.block').show().offset({top:100,left:100});
