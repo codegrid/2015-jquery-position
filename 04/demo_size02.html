@@ -4,54 +4,110 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>全体のサイズを取得する</title>
+
+
+<link href="../common/demo.css" rel="stylesheet"/>
 <script src="../node_modules/jquery/dist/jquery.js"></script>
-<script src="demo.js"></script>
-<link href="demo.css" rel="stylesheet"/>
+<script src="../common/demo.js"></script>
 <style>
+html{
+  border:solid 10px #aaccff;
+  padding: 5px;
+  background: #e0e0e0;
+}
+
+body{
+  margin: 0;
+  font-size:12px;
+  background: #f0f0f0;
+  border: solid 1px #ccc;
+}
 .box{
-  margin: 10px;
-  padding: 10px;
-  border:solid 1px #eee;
-  display:inline-block;
+  color: #555;
 }
 .box dl{
-  margin:0 0 10px;
+  margin:0 10px 10px;
 }
-.box input[type=text]{
+.box dt{
+  xmargin-top:10px;
+  font-weight: bold;
+}
+.box dd{
+  margin:0 0 0 10px;
+}
+
+.box input[type=text],
+.box input[type=number]{
   width:50px;
 }
+
+.info .name{
+  width:200px;
+}
+
+.open{
+  background: #00aaff;
+  color: #fff;
+  border-radius: 4px;
+  border: solid 1px #000;
+  border-top: none;
+  border-left: none;
+  cursor: pointer;
+}
+
+
 </style>
 </head>
 <body class="disabledAutoHeight">
   <div class="box">
     <dl>
-      <dt>window</dt>
-      <dd>browserWidth: <input name="winWidth" value="800" type="text"/> x browserHeight: <input name="winHeight" value="600" type="text"/></dd>
+      <dt>browser</dt>
+      <dd>resizeTo( <input name="winWidth" value="800" type="number"/> , <input name="winHeight" value="600" type="number"/> )</dd>
+    </dl>
+    <dl>
+      <dt>html</dt>
+      <dd>border-width: <input name="htmlBorderWidth" value="10" type="number"/></dd>
+      <dd>padding: <input name="htmlPadding" value="5" type="number"/></dd>
+    </dl>
+    <dl>
       <dt>body</dt>
-      <dd>width: <input name="htmlWidth" value="1000" type="text"/> x height: <input name="htmlHeight" value="700" type="text"/></dd>
+      <dd>width: <input name="bodyWidth" value="1000" type="number"/></dd>
+      <dd>height: <input name="bodyHeight" value="700" type="number"/></dd>
     </dl>
     <button class="open">open</button>
   </div>
   <div class="info"></div>
 <script>
+var query = $.parseURL().query;
+
+$('html').addClass('demo'+query.demo);
+
+
 var showInfo = function(){
   info.clearInfo();
-  info.showCss('html', ['padding-top','padding-left','border-top-width']);
+  info.showCss('html', ['padding-top','padding-left','border-top-width','width','height']);
   info.showCss('body', ['width','height']);
   info.setHtmlToInfo('<div>$(window)</div>');
-  info.showInfo('> width x height',$(window).width() + ' x ' + $(window).height(), true);
-  info.showInfo('> innerWidth x innerHeight',$(window).innerWidth() + ' x ' + $(window).innerHeight(), true);
-  info.showInfo('> outerWidth x outerHeight',$(window).outerWidth() + ' x ' + $(window).outerHeight(), true);
+  info.showInfo('> width() x height()',$(window).width() + ' x ' + $(window).height(), true);
+  info.showInfo('> innerWidth() x innerHeight()',$(window).innerWidth() + ' x ' + $(window).innerHeight(), true);
+  info.showInfo('> outerWidth() x outerHeight()',$(window).outerWidth() + ' x ' + $(window).outerHeight(), true);
 
-  info.setHtmlToInfo('<div>$(document)</div>');
-  info.showInfo('> width x height',$(document).width() + ' x ' + $(document).height(), true);
-  info.showInfo('> innerWidth x innerHeight',$(document).innerWidth() + ' x ' + $(document).innerHeight(), true);
-  info.showInfo('> outerWidth x outerHeight',$(document).outerWidth() + ' x ' + $(document).outerHeight(), true);
 
-  info.setHtmlToInfo('<div>$("html")</div>');
-  info.showInfo('> width x height',$("html").width() + ' x ' + $("html").height(), true);
-  info.showInfo('> innerWidth x innerHeight',$("html").innerWidth() + ' x ' + $("html").innerHeight(), true);
-  info.showInfo('> outerWidth x outerHeight',$("html").outerWidth() + ' x ' + $("html").outerHeight(), true);
+//  if(query.demo > 1){
+
+    info.setHtmlToInfo('<div>$(document)</div>');
+    info.showInfo('> width x height',$(document).width() + ' x ' + $(document).height(), true);
+    info.showInfo('> innerWidth x innerHeight',$(document).innerWidth() + ' x ' + $(document).innerHeight(), true);
+    info.showInfo('> outerWidth x outerHeight',$(document).outerWidth() + ' x ' + $(document).outerHeight(), true);
+
+    info.setHtmlToInfo('<div>$("html")</div>');
+    info.showInfo('> width x height',$("html").width() + ' x ' + $("html").height(), true);
+    info.showInfo('> innerWidth x innerHeight',$("html").innerWidth() + ' x ' + $("html").innerHeight(), true);
+    info.showInfo('> outerWidth x outerHeight',$("html").outerWidth() + ' x ' + $("html").outerHeight(), true);
+
+//  }
+
+
 }
 $(window).resize(function(){
   showInfo();
@@ -61,15 +117,21 @@ showInfo();
 var resize = function(){
   var winWidth = $('input[name=winWidth]').val();
   var winHeight = $('input[name=winHeight]').val();
-  var htmlWidth = $('input[name=htmlWidth]').val();
-  var htmlHeight = $('input[name=htmlHeight]').val();
+  var htmlBorderWidth = $('input[name=htmlBorderWidth]').val();
+  var htmlPadding = $('input[name=htmlPadding]').val();
+  var bodyWidth = $('input[name=bodyWidth]').val();
+  var bodyHeight = $('input[name=bodyHeight]').val();
 
   setTimeout(function(){
     window.resizeTo(winWidth, winHeight);
     setTimeout(function(){
       $('html').css({
-        width: htmlWidth,
-        height: htmlHeight
+        borderWidth: htmlBorderWidth,
+        padding: htmlPadding + 'px'
+      });
+      $('body').css({
+        width: bodyWidth,
+        height: bodyHeight
       });
       showInfo();
     },500);
@@ -77,13 +139,14 @@ var resize = function(){
 
 }
 
-var query = $.parseURL().query;
 if(query.winWidth){
-  $('.open').text('resize');
+  $('.open').text('update');
   $('input[name=winWidth]').val(query.winWidth);
   $('input[name=winHeight]').val(query.winHeight);
-  $('input[name=htmlWidth]').val(query.htmlWidth);
-  $('input[name=htmlHeight]').val(query.htmlHeight);
+  $('input[name=htmlBorderWidth]').val(query.htmlBorderWidth);
+  $('input[name=htmlPadding]').val(query.htmlPadding);
+  $('input[name=bodyWidth]').val(query.bodyWidth);
+  $('input[name=bodyHeight]').val(query.bodyHeight);
   resize();
 }
 $('.open').click(function(){
@@ -92,11 +155,7 @@ $('.open').click(function(){
     resize();
   }
   else{
-
-/\?/
-location.href
-
-    window.open(location.href + '?' + box.find('input').serialize(),'','width=100');
+    window.open(location.href + '?demo=' + query.demo + '&' + box.find('input').serialize(),'','width=100');
 
   }
 })

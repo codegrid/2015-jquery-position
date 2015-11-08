@@ -4,25 +4,53 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>要素のサイズを取得する</title>
+<link href="../common/demo.css" rel="stylesheet"/>
 <script src="../node_modules/jquery/dist/jquery.js"></script>
-<script src="demo.js"></script>
-<link href="demo.css" rel="stylesheet"/>
+<script src="../common/demo.js"></script>
 <style>
+body{
+  margin: 0;
+  font-size:12px;
+}
 .box{
   margin: 10px;
   padding: 10px;
-  border:solid 1px #eee;
   display:inline-block;
   width: 300px;
-  height: 200px;
-  border:solid 5px #aaa;
+  height: 150px;
+  border:solid 5px #aaccff;
+  background: #e0f0ff;
   overflow:scroll;
 }
-.box dl{
-  margin:0 0 10px;
+.box ul{
+  margin:0;
+  padding: 0;
 }
-.box input[type=text]{
+.box li{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.box input[type=text],
+.box input[type=number]{
   width:50px;
+}
+.change{
+  background: #00aaff;
+  color: #fff;
+  border-radius: 4px;
+  border: solid 1px #000;
+  border-top: none;
+  border-left: none;
+  cursor: pointer;
+}
+.dummy{
+  margin-top: 10px;
+  padding: 16px;
+  height: 100px;
+  background: #ccddff;
+  border-radius: 4px;
+  color: #fff;
 }
 </style>
 </head>
@@ -30,13 +58,14 @@
   <div class="box">
     <ul>
       <li>box-sizing: <select name="boxSizing"><option>content-box</option><option>border-box</option></select>
-      <li>margin: <input name="margin" type="text"/>px
-      <li>padding: <input name="padding" type="text"/>px
-      <li>width: <input name="width" value="1000" type="text"/>px x height: <input name="height" value="700" type="text"/>px</li>
-      <li>border-width: <input name="borderWidth" type="text"/>px
+      <li>margin: <input name="margin" type="number"/>px
+      <li>padding: <input name="padding" type="number"/>px
+      <li>width: <input name="width" value="1000" type="number"/>px</li>
+      <li>height: <input name="height" value="700" type="number"/>px</li>
+      <li>border-width: <input name="borderWidth" type="number"/>px</li>
     </ul>
-    <button class="apply">apply</button>
-    <div style="height:100px;background:#eee"></div>
+    <button class="change">change</button>
+    <div class="dummy">dummy</div>
   </div>
   <div class="info"></div>
 <script>
@@ -45,15 +74,39 @@ var box = $('.box');
 var showInfo = function(){
   info.clearInfo();
 
-  info.showCss('.box', ['box-sizing','border-top-width','width','height','padding-top','margin-top'], true);
+  info.showCss('.box', ['box-sizing','border-top-width','width','height','padding-top','margin-top']);
 
+  info.showInfo(' ');
+  info.showInfo('$("box").width()',box.width(), true);
+  info.showInfo('$("box").innerWidth()',box.innerWidth(), true);
+  info.showInfo('$("box").outerWidth()',box.outerWidth(), true);
 
-  info.showInfo('width x height',box.width() + ' x ' + box.height(), true);
-  info.showInfo('innerWidth x innerHeight',box.innerWidth() + ' x ' + box.innerHeight(), true);
-  info.showInfo('outerWidth x outerHeight',box.outerWidth() + ' x ' + box.outerHeight(), true);
+  info.showInfo(' ');
+  info.showInfo('$("box").height()',box.height(), true);
+  info.showInfo('$("box").innerHeight()',box.innerHeight(), true);
+  info.showInfo('$("box").outerHeight()',box.outerHeight(), true);
+
+  info.showInfo(' ');
 
   var style = window.getComputedStyle(box[0], null);
-  info.showInfo('getComputedStyle W x H',style.width + ' x ' + style.height, true);
+  info.showInfo('getComputedStyle().width',style.width, true);
+  info.showInfo('getComputedStyle().height',style.height, true);
+
+
+
+  // info.showInfo('innerWidth x innerHeight',box.innerWidth() + ' x ' + box.innerHeight(), true);
+  // info.showInfo('outerWidth x outerHeight',box.outerWidth() + ' x ' + box.outerHeight(), true);
+
+  // var style = window.getComputedStyle(box[0], null);
+  // info.showInfo('getComputedStyle W x H',style.width + ' x ' + style.height, true);
+
+
+  // info.showInfo('width x height',box.width() + ' x ' + box.height(), true);
+  // info.showInfo('innerWidth x innerHeight',box.innerWidth() + ' x ' + box.innerHeight(), true);
+  // info.showInfo('outerWidth x outerHeight',box.outerWidth() + ' x ' + box.outerHeight(), true);
+
+  // var style = window.getComputedStyle(box[0], null);
+  // info.showInfo('getComputedStyle W x H',style.width + ' x ' + style.height, true);
 
 }
 $(window).resize(function(){
@@ -83,7 +136,7 @@ $('input[name=width]').val(box.width())
 $('input[name=height]').val(box.height());
 $('input[name=borderWidth]').val(parseInt(box.css('border-top-width')));
 
-$('.apply').click(function(){
+$('.change').click(function(){
   resize();
 })
 
