@@ -1,0 +1,23 @@
+.toc ul{
+  margin: 0;
+  padding: 0;
+}
+.toc li{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.toc li a{
+  padding: 8px;
+  margin: 1px;
+  display: block;
+  background: #5588aa;
+  color: #fff;
+  cursor: pointer;
+}
+
+.toc a:hover,
+.toc .current{
+  background: #335588;
+  color: #ffffa0;
+}
