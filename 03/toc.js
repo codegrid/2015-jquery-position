@@ -54,13 +54,10 @@ $.fn.toc = function(
   });
   setCurrentClass();
 
-
   // 処理を間引く
-  function debounce(f, delay){
-    if(debounce.timer){
-      clearTimeout(debounce.timer);
-    }
-    debounce.timer = setTimeout(f, delay || 30);
+  function debounce(f){
+    cancelAnimationFrame(debounce.id);
+    debounce.id = requestAnimationFrame(f);
   }
 
   // 画面に表示されたコンテンツの目次を強調表示する
