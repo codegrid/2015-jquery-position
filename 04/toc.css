@@ -17,7 +17,7 @@
 }
 
 .toc a:hover,
-.toc .current{
+.scrollSpy .current{
   background: #335588;
   color: #ffffa0;
 }
