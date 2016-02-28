@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>見切れするドロップダウンメニュー</title>
+<link href="../common/demo.css" rel="stylesheet"/>
+<link href="demo_dropdown.css" rel="stylesheet"/>
+<style>
+.popup{
+  overflow: scroll;
+  width: 250px;
+  height: 100px;
+}
+</style>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../common/demo.js"></script>
+</head>
+<body>
+  <div style="display:inline-block;width:50%">
+    <a class="menuBtn">click</a>
+    <a class="menuBtn">click</a>
+  </div><div style="display:inline-block;width:50%;text-align:right">
+    <a class="menuBtn">click</a>
+    <a class="menuBtn">click</a>
+  </div>
+  <div class="popup" style="top:70px;left:auto;right:0">
+    <p>以下のボタンをクリックしてください</p>
+    <a class="menuBtn">click</a>
+    <a class="menuBtn">click</a>
+    <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  </div>
+  <div class="popup" style="left:0;top:auto;bottom:70px">
+    <p>以下のボタンをクリックしてください</p>
+    <a class="menuBtn">click</a>
+    <a class="menuBtn">click</a>
+    <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  </div>
+
+  <div class="menu">
+    <ul>
+      <li>menu1</li>
+      <li>menu2</li>
+      <li>menu3</li>
+      <li>menu1</li>
+      <li>menu2</li>
+    </ul>
+  </div>
+
+  <div style="position:absolute;bottom:20px;width:100%">
+    <div style="display:inline-block;width:50%">
+      <a class="menuBtn">click</a>
+      <a class="menuBtn">click</a>
+    </div><div style="display:inline-block;width:50%;text-align:right">
+      <a class="menuBtn">click</a>
+      <a class="menuBtn">click</a>
+    </div>
+  </div>
+
+<script>
+// html要素をbody要素に置き換えるoffsetParent()
+$.fn.getOffsetParentInBody = function(){
+    var $offset = $(this).offsetParent();
+    return $offset.prop('tagName') == 'HTML' ? $('body') : $offset;
+}
+
+// メニュー表示処理
+$.fn.showMenu = function(){
+
+    // メニューのjQueryオブジェクトを取得
+    var $menu = $('.menu');
+
+    // ボタンのjQueryオブジェクトを取得
+    var $button = $(this);
+
+    // ボタンの配置位置を取得
+    var buttonOffset = $button.offset();
+
+    // メニューの配置位置を算出
+    var menuPos = {
+
+        // ボタンのY座標（top） + ボタンの高さ（height）
+        top: buttonOffset.top + $button.outerHeight(),
+
+        // ボタンのY座標（left）
+        left: buttonOffset.left
+    };
+
+    // メニューの配置位置を設定し表示
+    $menu.show().offset(menuPos);
+
+    $('.menuBtn--active').removeClass('menuBtn--active');
+    $button.addClass('menuBtn--active');
+
+};
+
+// ボタンクリック時処理
+$('.menuBtn').on('click', function(){
+
+    // メニュー表示処理
+    $(this).showMenu();
+
+});
+
+</script>
+</body>
+</html>
