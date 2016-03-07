@@ -70,12 +70,15 @@
     </div>
   </div>
 
+
+
 <script>
-// html要素をbody要素に置き換えるoffsetParent()
-$.fn.getOffsetParentInBody = function(){
-    var $offset = $(this).offsetParent();
-    return $offset.prop('tagName') == 'HTML' ? $('body') : $offset;
-}
+
+// 横スクロールできるようにする
+$('<div/>').css({
+  width: $(window).width()+200,
+  position: 'absolute'
+}).appendTo('body').html('&nbsp;');
 
 // メニュー表示処理
 $.fn.showMenu = function(){
