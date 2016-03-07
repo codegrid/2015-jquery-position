@@ -27,7 +27,6 @@
 
 </style>
 <script src="../node_modules/jquery/dist/jquery.js"></script>
-<script src="../common/demo.js"></script>
 </head>
 <body>
   <div style="display:inline-block;width:50%">
@@ -79,6 +78,11 @@ $('<div/>').css({
   width: $(window).width()+200,
   position: 'absolute'
 }).appendTo('body').html('&nbsp;');
+
+// 横スクロールできるようにする
+$('body').css({
+  'min-height': $(window).height()+200
+});
 
 // メニュー表示処理
 $.fn.showMenu = function(){
