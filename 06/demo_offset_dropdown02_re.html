@@ -2,64 +2,58 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>見切れするドロップダウンメニュー</title>
+<title>擬似フレーム内のドロップダウンメニューの配置処理（２）</title>
 <link href="../common/demo.css" rel="stylesheet"/>
 <link href="demo_dropdown.css" rel="stylesheet"/>
 <style>
 .popup{
   overflow: scroll;
-  width: 250px;
+  left: 10px;
+  width: 300px;
   height: 100px;
 }
 </style>
 <script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../common/demo.js"></script>
 </head>
-<body>
-  <div style="display:inline-block;width:50%">
-    <a class="menuBtn">click</a>
-    <a class="menuBtn">click</a>
-  </div><div style="display:inline-block;width:50%;text-align:right">
-    <a class="menuBtn">click</a>
-    <a class="menuBtn">click</a>
-  </div>
-  <div class="popup" style="top:70px;left:auto;right:0">
-    <p>以下のボタンをクリックしてください</p>
-    <a class="menuBtn">click</a>
-    <a class="menuBtn">click</a>
-    <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-    <a class="menuBtn">click</a>
-    <a class="menuBtn">click</a>
-  </div>
-  <div class="popup" style="left:0;top:auto;bottom:70px">
-    <p>以下のボタンをクリックしてください</p>
-    <a class="menuBtn">click</a>
-    <a class="menuBtn">click</a>
-    <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-    <a class="menuBtn">click</a>
-    <a class="menuBtn">click</a>
-  </div>
+<body style="min-height:400px;">
 
-  <div class="menu">
-    <ul>
-      <li>menu1</li>
-      <li>menu2</li>
-      <li>menu3</li>
-      <li>menu4</li>
-      <li>menu5</li>
-    </ul>
-  </div>
+<a class="menuBtn">click</a>
+<a class="menuBtn">click</a>
+<a class="menuBtn">click</a>
 
-  <div style="position:absolute;bottom:0;left:0;padding:8px;box-sizing:border-box;width:100%">
-    <div style="display:inline-block;width:50%">
-      <a class="menuBtn">click</a>
-      <a class="menuBtn">click</a>
-    </div><div style="display:inline-block;width:50%;text-align:right">
-      <a class="menuBtn">click</a>
-      <a class="menuBtn">click</a>
-    </div>
-  </div>
+<div class="popup">
+  <p>以下のボタンをクリックしてください</p>
+  <a class="menuBtn">click</a>
+  <a class="menuBtn">click</a>
+  <a class="menuBtn">click</a>
+  <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <a class="menuBtn">click</a>
+  <a class="menuBtn">click</a>
+  <a class="menuBtn">click</a>
+</div>
+
+<div class="menu">
+  <ul>
+    <li>menu1</li>
+    <li>menu2</li>
+    <li>menu3</li>
+    <li>menu4</li>
+    <li>menu5</li>
+  </ul>
+</div>
+
+<p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+
+<div class="info"></div>
 
 <script>
+var showInfo = function(){
+  info.clearInfo();
+  info.showInfo('$(".menu").parent()',$('.menu').parent().prop('tagName'), true);
+}
+
 // メニュー表示処理
 $.fn.showMenu = function(){
 
@@ -78,6 +72,7 @@ $.fn.showMenu = function(){
   ctrlElementScroll( $button, $menu );
 
   ctrlWindowResize( $button, $menu );
+
 };
 
 function getMenuPos( $button, $menu ){
@@ -97,6 +92,7 @@ function getMenuPos( $button, $menu ){
 
   return menuPos;
 }
+
 
 function debounce(callback){
   cancelAnimationFrame(debounce.id);
@@ -171,6 +167,7 @@ $('.menuBtn').on('click', function(){
     // メニュー表示処理
     $(this).showMenu();
 
+    showInfo();
 });
 
 </script>

@@ -27,12 +27,16 @@
     <a class="menuBtn">click</a>
     <a class="menuBtn">click</a>
     <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <a class="menuBtn">click</a>
+    <a class="menuBtn">click</a>
   </div>
   <div class="popup" style="left:0;top:auto;bottom:70px">
     <p>以下のボタンをクリックしてください</p>
     <a class="menuBtn">click</a>
     <a class="menuBtn">click</a>
     <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <a class="menuBtn">click</a>
+    <a class="menuBtn">click</a>
   </div>
 
   <div class="menu">
@@ -65,35 +69,43 @@ $.fn.getOffsetParentInBody = function(){
 // メニュー表示処理
 $.fn.showMenu = function(){
 
-    // メニューのjQueryオブジェクトを取得
-    var $menu = $('.menu');
+  // メニューのjQueryオブジェクトを取得
+  var $menu = $('.menu');
 
-    // ボタンのjQueryオブジェクトを取得
-    var $button = $(this);
+  // ボタンのjQueryオブジェクトを取得
+  var $button = $(this);
 
-    // ボタンの配置位置を取得
-    var buttonOffset = $button.offset();
+  // メニューの配置位置を設定し表示
+  $menu.show().offset( getMenuPos( $button, $menu ) );
 
-    // メニューの配置位置を算出
-    var menuPos = {
+  $('.menuBtn--active').removeClass('menuBtn--active');
+  $button.addClass('menuBtn--active');
 
-        // ボタンのY座標（top） + ボタンの高さ（height）
-        top: buttonOffset.top + $button.outerHeight(),
+  ctrlElementScroll( $button, $menu );
 
-        // ボタンのY座標（left）
-        left: buttonOffset.left
-    };
-
-    // 座標補正
-    adjustPos($menu, menuPos);
-
-    // メニューの配置位置を設定し表示
-    $menu.show().offset(menuPos);
-
-    $('.menuBtn--active').removeClass('menuBtn--active');
-    $button.addClass('menuBtn--active');
+  ctrlWindowResize( $button, $menu );
 
 };
+
+function getMenuPos( $button, $menu ){
+
+  // ボタンの配置位置を取得
+  var buttonOffset = $button.offset();
+
+  // メニューの配置位置を算出
+  var menuPos = {
+
+    // ボタンのY座標（top） + ボタンの高さ（height）
+    top: buttonOffset.top + $button.outerHeight(),
+
+    // ボタンのY座標（left）
+    left: buttonOffset.left
+  };
+
+  adjustPos( $menu, menuPos );
+
+  return menuPos;
+}
 
 function adjustPos($menu, menuPos){
   var $win = $(window);
@@ -105,6 +117,72 @@ function adjustPos($menu, menuPos){
   if( overBottom > $win.scrollTop() ) {
     menuPos.top = menuPos.top - overBottom;
   }
+}
+
+function debounce(callback){
+  cancelAnimationFrame(debounce.id);
+  debounce.id = requestAnimationFrame(callback);
+}
+
+function ctrlElementScroll( $button, $menu ){
+
+  $('.scrollParent').removeClass('scrollParent').off('scroll.showMenuPlugin');
+
+  var $scrollParent;
+  $button.parents().each(function(i,parent){
+    var $parent = $(parent);
+    if(!$scrollParent && !(/^(HTML|BODY)$/.test($parent.prop('tagName'))) && $parent.css('overflow') === 'scroll'){
+      $scrollParent = $parent;
+    }
+  });
+  if( $scrollParent ){
+
+    $scrollParent.addClass('scrollParent').on('scroll.showMenuPlugin', function(){
+
+      debounce(function(){
+
+        // メニューの配置位置を設定し表示
+        $menu.show().offset( getMenuPos( $button, $menu ) );
+
+        var buttonOffset = $button.offset();
+        var menuOffset = $menu.offset();
+
+        // メニューが上側にある場合
+        if( menuOffset.top < buttonOffset.top ){
+          if( menuOffset.top + $menu.outerHeight() < $scrollParent.offset().top + $scrollParent.outerHeight()
+           && menuOffset.top + $menu.outerHeight() > $scrollParent.offset().top
+          ){
+            $menu.show();
+          }
+          else {
+            $menu.hide();
+          }
+        }
+        // メニューが下側にある場合
+        else {
+          if( menuOffset.top < $scrollParent.offset().top + $scrollParent.outerHeight()
+           && menuOffset.top > $scrollParent.offset().top
+          ){
+            $menu.show();
+          }
+          else {
+            $menu.hide();
+          }
+        }
+
+      });
+
+    });
+  }
+}
+
+function ctrlWindowResize( $button, $menu ){
+  $(window).off('resize.showMenuPlugin').on('resize.showMenuPlugin', function(){
+    debounce(function(){
+      // メニューの配置位置を設定し表示
+      $menu.show().offset( getMenuPos( $button, $menu ) );
+    });
+  });
 }
 
 
